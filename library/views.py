@@ -33,13 +33,4 @@ class NotesList(generics.ListCreateAPIView):
         serializer = NotesSerializer(queryset, many=True)
         return Response(serializer.data)
 
-class CreateBook(ModelViewSet):
-    queryset = Book.objects.create()
-    serializer_class = BookSerializer
 
-    def create_book(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exceptions=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

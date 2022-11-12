@@ -17,16 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from library.models import Book, Notes
 from library import views
+from library.serializers import BookSerializer, FeaturedSerializer, NotesSerializer
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('', views.api_root),
     path('books/', views.BookList.as_view(queryset=Book.objects.all(), serializer_class=BookSerializer), name='booklist'),
     path('featured/', views.FeaturedList.as_view(queryset=Book.objects.filter(featured=True), serializer_class=FeaturedSerializer), name='featuredlist'),
-    path('notes/', views.NoteList.as_view(queryset=Note.objects.all(), serializer_class=NoteSerializer), name='notelist'),
-    path('create/', views.CreateBook.as_view({'get': 'list'}), name='book-create')
+    path('notes/', views.NotesList.as_view(queryset=Notes.objects.all(), serializer_class=NotesSerializer), name='noteslist'),
 ]
 
 
-urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'html'])

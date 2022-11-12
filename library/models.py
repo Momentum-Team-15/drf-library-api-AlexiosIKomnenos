@@ -36,3 +36,4 @@ class ReadStatus(models.Model):
 
     def __str__(self):
         return self.read_status
+

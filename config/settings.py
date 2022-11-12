@@ -21,6 +21,8 @@ env = environ.Env(
 
 environ.Env.read_env()
 
+ALLOWED_HOSTS = []
+
 if env("RENDER"):
     ALLOWED_HOSTS.append(env("RENDER_EXTERNAL_HOSTNAME"))
     DJANGO_SUPERUSER_USERNAME=env("DJANGO_SUPERUSER_USERNAME")
