@@ -28,11 +28,12 @@ class Notes(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="booknotes", null=True, blank=True)
 
     def __str__(self):
-        return self.entry_name
+        return f"{self.book} notes on created {self.created_at}"
 
 class ReadStatus(models.Model):
     read_status = models.CharField(max_length=50)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
+    user = models.ForeignKey('User', on_delete=models.CASCADE,blank=True, null=True)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="readstatuses", null=True, blank=True)
 
     def __str__(self):
         return self.read_status

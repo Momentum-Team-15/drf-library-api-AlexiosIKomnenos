@@ -22,6 +22,7 @@ from library.serializers import BookSerializer, FeaturedSerializer, NotesSeriali
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
     path('books/', views.BookList.as_view(queryset=Book.objects.all(), serializer_class=BookSerializer), name='booklist'),
     path('featured/', views.FeaturedList.as_view(queryset=Book.objects.filter(featured=True), serializer_class=FeaturedSerializer), name='featuredlist'),
     path('notes/', views.NotesList.as_view(queryset=Notes.objects.all(), serializer_class=NotesSerializer), name='noteslist'),

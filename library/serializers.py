@@ -19,3 +19,10 @@ class FeaturedSerializer(serializers.ModelSerializer):
         model = Book
         fields = ['title', 'author', 'published', 'genre']
     
+class BookDetailSerializer(serializers.ModelSerializer):
+    statuses = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    notes = serializers.StringRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = Book
+        fields = ['title', 'author', 'published', 'genre', 'featured', 'readstatuses', 'notes']
